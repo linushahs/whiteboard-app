@@ -1,0 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.btns-container {
+  display: flex;
+  gap: 8px;
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  border-radius: 10px;
+  border: 2px solid gray;
+  padding: 0.5rem 1rem;
+}
+
+.btns-container button {
+  padding: 0.5rem 1rem;
+  background: whitesmoke;
+  border-radius: 8px;
+  border: 0;
+  outline: none;
+}
+
+.btns-container button:hover {
+  background-color: gray;
+  cursor: pointer;
+}
