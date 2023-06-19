@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import Canvas from "./components/Canvas";
+import Canvas from "./components/canvas/Canvas";
 import "./App.css";
+import ShapeCursor from "./components/shape/ShapeCursor";
+import ShapeButtonsContainer from "./components/elements/ShapeButtonsContainer";
 
 export default function App() {
   const [rectangles, setRectangles] = useState([]);
@@ -18,14 +20,12 @@ export default function App() {
   };
 
   return (
-    <div>
-      <Canvas rectangles={rectangles} setRectangles={setRectangles} />
+    <div className="app-container">
+      {/* <Canvas rectangles={rectangles} setRectangles={setRectangles} /> */}
+      <ShapeCursor />
 
-      <div className="btns-container">
-        <button onClick={createDraggableRect}>Rectangle</button>
-        <button>Square</button>
-        <button>Circle</button>
-      </div>
+      <ShapeButtonsContainer />
+
     </div>
   );
 }

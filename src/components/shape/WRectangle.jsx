@@ -1,18 +1,7 @@
-import React, { useRef, useEffect, Fragment } from "react";
-import { Rect, Transformer } from "react-konva";
+import React, { Fragment } from "react";
+import { Rect } from "react-konva";
 
-export function Rectangle({ shapeProps, isSelected, onSelect, onChange }) {
-  const shapeRef = useRef();
-  const trRef = useRef();
-
-  useEffect(() => {
-    if (isSelected) {
-      // we need to attach transformer manually
-      trRef.current.nodes([shapeRef.current]);
-      trRef.current.getLayer().batchDraw();
-    }
-  }, [isSelected]);
-
+export const WRectangle = React.forwardRef(({ shapeRef, shapeProps, onSelect, onChange }) => {
   return (
     <Fragment>
       <Rect
@@ -50,18 +39,7 @@ export function Rectangle({ shapeProps, isSelected, onSelect, onChange }) {
           });
         }}
       />
-      {isSelected && (
-        <Transformer
-          ref={trRef}
-          boundBoxFunc={(oldBox, newBox) => {
-            // limit resize
-            if (newBox.width < 5 || newBox.height < 5) {
-              return oldBox;
-            }
-            return newBox;
-          }}
-        />
-      )}
+
     </Fragment>
   );
-}
+});
