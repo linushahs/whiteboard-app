@@ -5,53 +5,53 @@ import { WCircle } from "./WCircle";
 import { WLine } from "./WLine";
 
 export function Shape({ type, shapeProps, isSelected, onSelect, onChange }) {
-    const shapeRef = useRef();
-    const trRef = useRef();
+  const shapeRef = useRef();
+  const trRef = useRef();
 
-    useEffect(() => {
-        if (isSelected) {
-            // we need to attach transformer manually
-            trRef.current.nodes([shapeRef.current]);
-            trRef.current.getLayer().batchDraw();
-        }
-    }, [isSelected]);
+  useEffect(() => {
+    if (isSelected) {
+      // we need to attach transformer manually
+      trRef.current.nodes([shapeRef.current]);
+      trRef.current.getLayer().batchDraw();
+    }
+  }, [isSelected]);
 
-    const renderShape = () => {
-        const shapeTypeProps = {
-            shapeRef,
-            shapeProps,
-            onSelect,
-            onChange
-        }
-
-        switch (type) {
-            case "rectangle":
-                return <WRectangle {...shapeTypeProps} />;
-            case "circle":
-                return <WCircle {...shapeTypeProps} />;
-            case "line":
-                return <WLine {...shapeTypeProps} />;
-            default:
-                return null;
-        }
+  const renderShape = () => {
+    const shapeTypeProps = {
+      ref: shapeRef,
+      shapeProps,
+      onSelect,
+      onChange,
     };
 
-    return (
-        <Fragment>
-            {renderShape()}
+    switch (type) {
+      case "rectangle":
+        return <WRectangle {...shapeTypeProps} />;
+      case "circle":
+        return <WCircle {...shapeTypeProps} />;
+      case "line":
+        return <WLine {...shapeTypeProps} />;
+      default:
+        return null;
+    }
+  };
 
-            {isSelected && (
-                <Transformer
-                    ref={trRef}
-                    boundBoxFunc={(oldBox, newBox) => {
-                        // limit resize
-                        if (newBox.width < 5 || newBox.height < 5) {
-                            return oldBox;
-                        }
-                        return newBox;
-                    }}
-                />
-            )}
-        </Fragment>
-    );
+  return (
+    <Fragment>
+      {renderShape()}
+
+      {isSelected && (
+        <Transformer
+          ref={trRef}
+          boundBoxFunc={(oldBox, newBox) => {
+            // limit resize
+            if (newBox.width < 5 || newBox.height < 5) {
+              return oldBox;
+            }
+            return newBox;
+          }}
+        />
+      )}
+    </Fragment>
+  );
 }

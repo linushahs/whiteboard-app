@@ -7,13 +7,35 @@
 .app-container {
   height: 100vh;
   width: 100vw;
-  cursor: crosshair;
   background: transparent;
 }
 
 .custom-cursor {
-  position: fixed;
+  width: 100%;
+  height: 100%;
+  position: relative;
   pointer-events: none; /* Ensures the cursor doesn't interfere with underlying elements */
+}
+
+.rectangle {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 60px;
+  height: 60px;
+  background-color: black;
+  opacity: 0.1;
+}
+
+.circle {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: black;
+  opacity: 0.1;
 }
 
 .btns-container {
@@ -25,6 +47,8 @@
   border-radius: 10px;
   border: 2px solid gray;
   padding: 0.5rem 1rem;
+  cursor: pointer;
+  background-color: white;
 }
 
 .btns-container button {

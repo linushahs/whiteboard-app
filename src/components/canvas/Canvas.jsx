@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Stage, Layer, Text, Line, Rect, Transformer } from "react-konva";
-import { Rectangle } from "../shape/WRectangle";
+import { WRectangle } from "../shape/WRectangle";
 
 export default function Canvas() {
   // const [tool, setTool] = React.useState("pen");
