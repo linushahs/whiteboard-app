@@ -1,13 +1,19 @@
 import React, { useRef, useState } from "react";
 import { Stage, Layer, Text, Line, Rect, Transformer } from "react-konva";
 import { WRectangle } from "../shape/WRectangle";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { rectanglesList } from "../state/shape.state";
 
-export default function Canvas({ rectangles, circles }) {
+export default function Canvas() {
   // const [tool, setTool] = React.useState("pen");
   // const [lines, setLines] = React.useState([]);
   // const isDrawing = React.useRef(false);
   const [selectedRect, selectRect] = useState(null);
+  const [rectangles, setRectangles] = useRecoilState(rectanglesList);
 
+  const createDraggableCircle = () => {
+    setCircles([...circles, defaultCircle]);
+  };
   // const handleMouseDown = (e) => {
   //   const stage = e.target.getStage();
 
@@ -50,15 +56,15 @@ export default function Canvas({ rectangles, circles }) {
           <WRectangle
             key={index}
             shapeProps={rect}
-            // isSelected={index === selectedRect}
-            // onSelect={() => {
-            //   selectRect(index);
-            // }}
-            // onChange={(newAttrs) => {
-            //   const rects = rectangles.slice();
-            //   rects[index] = newAttrs;
-            //   setRectangles(rects);
-            // }}
+            isSelected={index === selectedRect}
+            onSelect={(e) => {
+              selectRect(index);
+            }}
+            onChange={(newAttrs) => {
+              const rects = [...rectangles];
+              rects[index] = newAttrs;
+              setRectangles(rects);
+            }}
           />
         ))}
       </Layer>

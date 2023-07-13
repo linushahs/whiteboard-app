@@ -6,10 +6,17 @@ export const WRectangle = React.forwardRef(
     return (
       <Fragment>
         <Rect
-          onClick={onSelect}
-          onTap={onSelect}
           ref={ref}
-          {...shapeProps}
+          // onClick={(e) => {
+          //   e.stopPropagation();
+          //   onSelect();
+          // }}
+          // onTap={onSelect}
+          x={100}
+          y={100}
+          width={100}
+          height={100}
+          fill="black"
           draggable
           onDragEnd={(e) => {
             onChange({
@@ -23,7 +30,7 @@ export const WRectangle = React.forwardRef(
             // and NOT its width or height
             // but in the store we have only width and height
             // to match the data better we will reset scale on transform end
-            const node = shapeRef.current;
+            const node = ref.current;
             const scaleX = node.scaleX();
             const scaleY = node.scaleY();
 
@@ -36,7 +43,7 @@ export const WRectangle = React.forwardRef(
               y: node.y(),
               // set minimal value
               width: Math.max(5, node.width() * scaleX),
-              height: Math.max(node.height() * scaleY),
+              height: Math.max(5, node.height() * scaleY),
             });
           }}
         />

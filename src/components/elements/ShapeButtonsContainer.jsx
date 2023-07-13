@@ -6,7 +6,7 @@ export default function ShapeButtonsContainer() {
   const [disabledButton, setDisabledButton] = useState(null);
   const [cursor, setCursor] = useRecoilState(cursorStyle);
 
-  const handleButtonClick = (buttonType) => {
+  const handleButtonClick = (e, buttonType) => {
     setDisabledButton(buttonType);
     setCursor({ type: "crosshair", shape: buttonType });
   };
@@ -16,16 +16,17 @@ export default function ShapeButtonsContainer() {
       className="btns-container"
       onMouseEnter={() => setCursor({ ...cursor, visibility: false })}
       onMouseLeave={() => setCursor({ ...cursor, visibility: true })}
+      onClick={(e) => e.stopPropagation()}
     >
       <button
-        onClick={() => handleButtonClick("rectangle")}
+        onClick={(e) => handleButtonClick(e, "rectangle")}
         disabled={disabledButton === "rectangle"}
       >
         Rectangle
       </button>
       <button>Line</button>
       <button
-        onClick={() => handleButtonClick("circle")}
+        onClick={(e) => handleButtonClick(e, "circle")}
         disabled={disabledButton === "circle"}
       >
         Circle

@@ -11,7 +11,7 @@ export const circlesList = atom({
 });
 
 export const linesList = atom({
-  key: "cirlces",
+  key: "lines",
   default: [],
 });
 
