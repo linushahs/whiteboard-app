@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { Circle, Rect } from "react-konva";
+import React, { useEffect, useState } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { circlesList, cursorStyle, rectanglesList } from "../state/shape.state";
+import { defaultCircle, defaultRectangle } from "../actions/shape.actions";
 
-const ShapeCursor = ({ cursorStyle }) => {
+const ShapeCursor = () => {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+  const cursor = useRecoilValue(cursorStyle);
 
   const handleMouseMove = (e) => {
     const { clientX, clientY } = e;
@@ -22,11 +25,11 @@ const ShapeCursor = ({ cursorStyle }) => {
       style={{
         left: cursorPosition.x,
         top: cursorPosition.y,
-        visibility: cursorStyle.visibility ? "visible" : "hidden",
+        visibility: cursor.visibility ? "visible" : "hidden",
       }}
     >
       {/* show the selected shape: rectange, circle or line  */}
-      <div className={cursorStyle.shape}></div>
+      <div className={cursor.shape}></div>
     </div>
   );
 };
