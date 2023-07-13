@@ -2,11 +2,11 @@ import React, { useRef, useState } from "react";
 import { Stage, Layer, Text, Line, Rect, Transformer } from "react-konva";
 import { WRectangle } from "../shape/WRectangle";
 
-export default function Canvas() {
+export default function Canvas({ rectangles, circles }) {
   // const [tool, setTool] = React.useState("pen");
   // const [lines, setLines] = React.useState([]);
   // const isDrawing = React.useRef(false);
-  // const [selectedRect, selectRect] = useState(null);
+  const [selectedRect, selectRect] = useState(null);
 
   // const handleMouseDown = (e) => {
   //   const stage = e.target.getStage();
@@ -44,28 +44,23 @@ export default function Canvas() {
   // };
 
   return (
-    <Stage
-      width={window.innerWidth - 50}
-      height={window.innerHeight - 50}
-    >
+    <Stage width={window.innerWidth - 50} height={window.innerHeight - 50}>
       <Layer>
-        {/* {rectangles.map((rect, index) => (
-          <Rectangle
+        {rectangles.map((rect, index) => (
+          <WRectangle
             key={index}
             shapeProps={rect}
-            isSelected={index === selectedRect}
-            onSelect={() => {
-              selectRect(index);
-            }}
-            onChange={(newAttrs) => {
-              const rects = rectangles.slice();
-              rects[index] = newAttrs;
-              setRectangles(rects);
-            }}
+            // isSelected={index === selectedRect}
+            // onSelect={() => {
+            //   selectRect(index);
+            // }}
+            // onChange={(newAttrs) => {
+            //   const rects = rectangles.slice();
+            //   rects[index] = newAttrs;
+            //   setRectangles(rects);
+            // }}
           />
-        ))} */}
-        {children}
-
+        ))}
       </Layer>
     </Stage>
   );

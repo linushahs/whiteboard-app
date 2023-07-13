@@ -22,6 +22,7 @@ const ShapeCursor = ({ cursorStyle }) => {
       style={{
         left: cursorPosition.x,
         top: cursorPosition.y,
+        visibility: cursorStyle.visibility ? "visible" : "hidden",
       }}
     >
       {/* show the selected shape: rectange, circle or line  */}
