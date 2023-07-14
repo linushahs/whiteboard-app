@@ -14,7 +14,7 @@ export default function Canvas() {
   // const [tool, setTool] = React.useState("pen");
   // const [lines, setLines] = React.useState([]);
   // const isDrawing = React.useRef(false);
-  const [selectedRect, setSelectedRect] = useState(0);
+  const [selectedID, setSelectedID] = useState(null);
   const [rectangles, setRectangles] = useRecoilState(rectanglesListState);
   const [circles, setCircles] = useRecoilState(circlesListState);
   const selectedShape = useRecoilValue(selectedShapeState);
@@ -23,7 +23,7 @@ export default function Canvas() {
     const newRectangle = { ...defaultRectangle };
     newRectangle["x"] = e.evt.pageX;
     newRectangle["y"] = e.evt.pageY;
-
+    newRectangle["id"] = "rect" + (rectangles.length + 1);
     setRectangles([...rectangles, newRectangle]);
   };
 
@@ -31,6 +31,7 @@ export default function Canvas() {
     const newCircle = { ...defaultCircle };
     newCircle["x"] = e.evt.pageX;
     newCircle["y"] = e.evt.pageY;
+    newCircle["id"] = "circle" + (circles.length + 1);
 
     setCircles([...circles, newCircle]);
   };
@@ -74,7 +75,7 @@ export default function Canvas() {
     // deselect when clicked on empty area
     const clickedOnEmpty = e.target === e.target.getStage();
     if (clickedOnEmpty) {
-      setSelectedRect(null);
+      setSelectedID(null);
     }
   };
 
@@ -92,8 +93,8 @@ export default function Canvas() {
 
   return (
     <Stage
-      width={window.innerWidth - 50}
-      height={window.innerHeight - 50}
+      width={window.innerWidth}
+      height={window.innerHeight}
       onClick={handleCanvasClick}
     >
       <Layer>
@@ -101,8 +102,8 @@ export default function Canvas() {
           <WRectangle
             key={index}
             shapeProps={rect}
-            isSelected={index === selectedRect}
-            onSelect={() => setSelectedRect(index)}
+            isSelected={rect.id === selectedID}
+            onSelect={() => setSelectedID(rect.id)}
             onChange={(newAttrs) => {
               const rects = [...rectangles];
               rects[index] = newAttrs;
@@ -115,6 +116,8 @@ export default function Canvas() {
           <WCircle
             key={index}
             shapeProps={circle}
+            isSelected={circle.id === selectedID}
+            onSelect={() => setSelectedID(circle.id)}
             onChange={(newAttrs) => {
               const c = [...circles];
               c[index] = newAttrs;
