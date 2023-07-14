@@ -8,7 +8,7 @@ export default function ShapeButtonsContainer() {
 
   const handleButtonClick = (e, buttonType) => {
     selectShape(buttonType);
-    setCursor({ type: "crosshair", shape: buttonType });
+    setCursor({ type: "crosshair", shape: buttonType, visibility: true });
   };
 
   return (

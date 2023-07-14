@@ -20,7 +20,7 @@ export const cursorStyleState = atom({
   default: {
     type: "default",
     shape: "",
-    visibility: false,
+    visibility: "hidden",
   },
 });
 
