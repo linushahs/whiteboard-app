@@ -1,25 +1,30 @@
-import { atom } from "recoil";
+import { atom, selector } from "recoil";
 
-export const rectanglesList = atom({
+export const rectanglesListState = atom({
   key: "rectangles",
   default: [],
 });
 
-export const circlesList = atom({
+export const circlesListState = atom({
   key: "cirlces",
   default: [],
 });
 
-export const linesList = atom({
+export const linesListState = atom({
   key: "lines",
   default: [],
 });
 
-export const cursorStyle = atom({
+export const cursorStyleState = atom({
   key: "cursorStyle",
   default: {
     type: "default",
     shape: "",
     visibility: false,
   },
+});
+
+export const selectedShapeState = atom({
+  key: "selectedShape",
+  default: "",
 });

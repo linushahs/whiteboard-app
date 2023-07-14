@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { useRecoilState } from "recoil";
-import { cursorStyle } from "../state/shape.state";
+import { cursorStyleState, selectedShapeState } from "../state/shape.state";
 
 export default function ShapeButtonsContainer() {
-  const [disabledButton, setDisabledButton] = useState(null);
-  const [cursor, setCursor] = useRecoilState(cursorStyle);
+  const [shape, selectShape] = useRecoilState(selectedShapeState);
+  const [cursor, setCursor] = useRecoilState(cursorStyleState);
 
   const handleButtonClick = (e, buttonType) => {
-    setDisabledButton(buttonType);
+    selectShape(buttonType);
     setCursor({ type: "crosshair", shape: buttonType });
   };
 
@@ -20,14 +20,14 @@ export default function ShapeButtonsContainer() {
     >
       <button
         onClick={(e) => handleButtonClick(e, "rectangle")}
-        disabled={disabledButton === "rectangle"}
+        disabled={shape === "rectangle"}
       >
         Rectangle
       </button>
       <button>Line</button>
       <button
         onClick={(e) => handleButtonClick(e, "circle")}
-        disabled={disabledButton === "circle"}
+        disabled={shape === "circle"}
       >
         Circle
       </button>

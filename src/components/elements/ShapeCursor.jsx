@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { circlesList, cursorStyle, rectanglesList } from "../state/shape.state";
-import { defaultCircle, defaultRectangle } from "../actions/shape.actions";
+import { useRecoilValue } from "recoil";
+import { cursorStyleState } from "../state/shape.state";
 
 const ShapeCursor = () => {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
-  const cursor = useRecoilValue(cursorStyle);
+  const cursor = useRecoilValue(cursorStyleState);
 
   const handleMouseMove = (e) => {
     const { clientX, clientY } = e;
