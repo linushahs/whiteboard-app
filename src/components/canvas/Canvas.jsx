@@ -14,7 +14,7 @@ export default function Canvas() {
   // const [tool, setTool] = React.useState("pen");
   // const [lines, setLines] = React.useState([]);
   // const isDrawing = React.useRef(false);
-  const [selectedRect, selectRect] = useState(null);
+  const [selectedRect, setSelectedRect] = useState(0);
   const [rectangles, setRectangles] = useRecoilState(rectanglesListState);
   const [circles, setCircles] = useRecoilState(circlesListState);
   const selectedShape = useRecoilValue(selectedShapeState);
@@ -70,8 +70,16 @@ export default function Canvas() {
   //   isDrawing.current = false;
   // };
 
+  const checkDeselect = (e) => {
+    // deselect when clicked on empty area
+    const clickedOnEmpty = e.target === e.target.getStage();
+    if (clickedOnEmpty) {
+      setSelectedRect(null);
+    }
+  };
+
   const handleCanvasClick = (e) => {
-    console.log(selectedShape);
+    checkDeselect(e);
     switch (selectedShape) {
       case "rectangle":
         return createDraggableRect(e);
@@ -93,6 +101,8 @@ export default function Canvas() {
           <WRectangle
             key={index}
             shapeProps={rect}
+            isSelected={index === selectedRect}
+            onSelect={() => setSelectedRect(index)}
             onChange={(newAttrs) => {
               const rects = [...rectangles];
               rects[index] = newAttrs;
